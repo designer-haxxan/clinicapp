@@ -1,6 +1,6 @@
 // Authentication against the eposwala login API (POST {AUTH_API_BASE}/login).
 // One account is bound server-side to one device (deviceId). After a successful online login the
-// session { token, expiresAt, username } is kept in LocalStorage and the POS works offline until
+// session { token, expiresAt, username } is kept in LocalStorage and the app works offline until
 // expiresAt. Passwords are never stored.
 import { CONFIG, storageKey } from '../config.js';
 import { AppError } from '../core/utils.js';
@@ -19,12 +19,12 @@ const ERRORS = {
 };
 const GENERIC = 'Login failed. Try again.';
 
-export const ROLES = { admin: 'Owner', manager: 'Manager', cashier: 'Cashier' };
+export const ROLES = { admin: 'Owner', manager: 'Manager', reception: 'Reception' };
 
-const CASHIER = ['sale.create', 'party.edit', 'voucher.create', 'reports.view'];
-const MANAGER = [...CASHIER, 'sale.edit', 'sale.void', 'sale.return', 'purchase.manage', 'product.edit', 'product.delete',
-  'party.delete', 'voucher.void', 'account.manage', 'stock.adjust', 'reports.profit', 'settings.manage', 'backup.export'];
-const PERMISSIONS = { cashier: CASHIER, manager: MANAGER, admin: ['*'] };
+const RECEPTION = ['token.manage', 'appointment.manage', 'patient.edit', 'bill.create', 'payment.collect'];
+const MANAGER = [...RECEPTION, 'bill.void', 'doctor.manage', 'payout.create', 'fee.manage', 'expense.manage',
+  'reports.view', 'settings.manage', 'backup.export'];
+const PERMISSIONS = { reception: RECEPTION, manager: MANAGER, admin: ['*'] };
 
 let current = null;
 
@@ -42,7 +42,7 @@ function readSession() {
   try { return JSON.parse(localStorage.getItem(SESSION_KEY) || 'null'); } catch { return null; }
 }
 
-// The API identifies a shop account by username; that account owns all POS functions on its device.
+// The API identifies a clinic account by username; that account owns all functions on its device.
 // If the server ever includes a known `role`, it is honoured.
 function toUser(s) {
   return { id: s.username, name: s.username, username: s.username, role: PERMISSIONS[s.role] ? s.role : 'admin' };

@@ -1,7 +1,7 @@
 {
-  "name": "SaleAPP POS",
-  "short_name": "SaleAPP",
-  "description": "Offline-first point of sale with sales, purchases, stock, accounts and reports.",
+  "name": "ClinicPro",
+  "short_name": "ClinicPro",
+  "description": "Offline-first clinic management: tokens, appointments, doctor-wise billing, expenses and day-end reports.",
   "id": "./index.html",
   "start_url": "./index.html",
   "scope": "./",
@@ -9,14 +9,15 @@
   "orientation": "any",
   "background_color": "#0f0c29",
   "theme_color": "#4f46e5",
-  "categories": ["business", "finance", "productivity"],
+  "categories": ["medical", "business", "productivity"],
   "icons": [
     { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
     { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
     { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ],
   "shortcuts": [
-    { "name": "New sale", "url": "./index.html#/pos", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Reception", "url": "./index.html#/reception", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "New bill", "url": "./index.html#/billing/new", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
     { "name": "Dashboard", "url": "./index.html#/dashboard", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] }
   ]
 }
